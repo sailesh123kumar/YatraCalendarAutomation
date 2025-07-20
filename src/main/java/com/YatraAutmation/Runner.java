@@ -22,15 +22,9 @@ public class Runner {
 		WebDriver driver = new ChromeDriver(options);
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 		driver.get("https://www.yatra.com/");
-
 		driver.manage().window().maximize();
 		handlingPopUp(wait);
-		
-		By departureDateLocator = By.xpath("//div[@aria-label=\"Departure Date inputbox\"]");
-
-		WebElement departureDate = wait.until(ExpectedConditions.elementToBeClickable(departureDateLocator));
-		departureDate.click();
-
+		clickDepartureDate(wait);
 		WebElement currentMonth = selectTheMonthFromCalenDar(wait, 0);
 		WebElement nextMonth = selectTheMonthFromCalenDar(wait, 1);
 		Thread.sleep(2000);
@@ -43,6 +37,12 @@ public class Runner {
 
 		compareTwoMonthsprice(currentMonthlowest, NextMonthLowest);
 
+	}
+
+	private static void clickDepartureDate(WebDriverWait wait) {
+		By departureDateLocator = By.xpath("//div[@aria-label=\"Departure Date inputbox\"]");
+		WebElement departureDate = wait.until(ExpectedConditions.elementToBeClickable(departureDateLocator));
+		departureDate.click();
 	}
 
 	private static void handlingPopUp(WebDriverWait wait) {
